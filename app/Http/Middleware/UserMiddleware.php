@@ -19,14 +19,13 @@ class UserMiddleware
     {
         if(Auth::guard('user')->guest()){
             if($request->json() || $request->wantsJson()){
-                return response("Unauthorized",401);
+                return redirect(url('/'));
             }else{
                 return redirect(route('login'));
             }
         }
 
-        $response=$next($request);
-
+        $response = $next($request);
 
         $response->headers->set('Access-Control-Allow-Origin' , '*');
         $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');

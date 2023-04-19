@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Kiddos - Free Bootstrap 4 Template by Colorlib</title>
+  <title>{{ config('app.name', '') }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon bg-secondary mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                            <span class="text">zerocool@email.com</span>
+                            <span class="text">halawa@email.com</span>
                         </div>
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon bg-tertiary mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
@@ -48,20 +48,18 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
         <div class="container d-flex align-items-center">
-            <a class="navbar-brand" href="#">Halawat al-iman</a>
+            <a class="navbar-brand" href="#"><i class="oi oi-mosque"></i>&nbsp;Halawat al-iman</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span>
           </button>
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link pl-0">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="teacher.html" class="nav-link">Teacher</a></li>
-                <li class="nav-item"><a href="courses.html" class="nav-link">Courses</a></li>
-                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">Login</a></li>
+                <li class="nav-item active"><a href="{{url('/')}}" class="nav-link pl-0"><i class="icon-home"></i>&nbsp;Home</a></li>
+                <li class="nav-item"><a href="{{url('activity')}}" class="nav-link"><i class="icon-cogs"></i>&nbsp;Activity</a></li>
+                <li class="nav-item"><a href="{{url('muslims')}}" class="nav-link"><i class="icon-users"></i>&nbsp;All muslims</a></li>
+                <li class="nav-item"><a href="{{url('gallery')}}" class="nav-link"><i class="icon-image"></i>&nbsp;Gallery</a></li>
+              <li class="nav-item"><a href="{{url('contact')}}" class="nav-link"><i class="icon-phone"></i>&nbsp;Contact</a></li>
+              <li class="nav-item d-flex"><a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal"><i class="icon-user"></i>&nbsp;Login</a></li>
             </ul>
           </div>
         </div>
@@ -475,11 +473,12 @@
                   <h5>Login here</h5>
                 </div>
                 <div class="modal-body">
-                  <p><i class="fa fa-question-circle"></i>Are you sure , you want to log-off ? <br /></p>
-                  <form>
-                      <input type="text" name="uname" class="form-control">
-                      <input type="password" name="uname" class="form-control">
-                      <button>Login</button>
+                  <!-- <p><i class="fa fa-question-circle"></i>Are you sure , you want to log-off ? <br /></p> -->
+                  <form class="form-group" method="POST" action="{{url('test')}}">
+                    @csrf
+                      <input type="text" name="email" class="form-control"><br>
+                      <input type="password" name="password" class="form-control">
+                      <button class="btn btn-primary" type="submit">Login</button>
                   </form>
                   <p><i class="text-center text-primary"></i>Forgot password <br /></p>
 

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('test','login')->name('login');
+    Route::post('logout','Logout')->name('logout');
+});
+
+
+Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::get('dashboard','UserHome')->name('homepage');
+    });
 });
