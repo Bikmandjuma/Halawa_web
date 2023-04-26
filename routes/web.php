@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/AllMuslims', function () {
+    return view('muslims');
+})->name('muslims');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::controller(AuthController::class)->group(function () {
     Route::post('test','login')->name('login');
     Route::post('logout','Logout')->name('logout');
@@ -29,5 +37,12 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
     Route::controller(UserController::class)->group(function(){
         Route::get('dashboard','UserHome')->name('homepage');
+        Route::get('information','MyInformation')->name('myinformation');
+        Route::get('editinformation','EditMyInformation')->name('editinfo');
+        Route::get('password','PasswordForm')->name('passform');
+        Route::post('Submitpswdform','CreatePassword')->name('changepassword');
+        Route::post('Submitprofilform','CreateProfile')->name('changeprofile');
+        Route::get('profile','ShowProfile');
+        Route::post('EditInfo/{id}','UpdateInfo')->name('editinfo');
     });
 });

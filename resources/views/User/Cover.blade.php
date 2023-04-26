@@ -36,6 +36,10 @@
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- Scripts -->
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+  
   <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
@@ -93,13 +97,13 @@
 
         </div>
 
-        <div class="dropdown-menu dropdown-menu-right bg-info" style="margin-top:5px;padding-right:20px;border:2px solid white;">
-           <a href="{{url('es/manage/password')}}" class="dropdown-item w3-hover-text-black w3-hover-text-black">
+        <div class="dropdown-menu dropdown-menu-right bg-info text-center" style="margin-top:7px;border:2px solid white;">
+           <a href="{{url('user/password')}}" class="dropdown-item w3-hover-text-black w3-hover-text-black">
             <i class="fas fa-key mr-2"></i>
           Password
           </a>
           <div class="dropdown-divider"></div>
-          <a href="{{url('es/manage/profile')}}" class="dropdown-item w3-hover-text-black w3-hover-text-black">
+          <a href="{{url('user/profile')}}" class="dropdown-item w3-hover-text-black w3-hover-text-black">
             <i class="fas fa-image mr-2"></i>
            Profile
           </a>
@@ -111,21 +115,11 @@
             </style>
           
           <div class="dropdown-divider"></div>
-          <a href="" class="dropdown-item w3-hover-text-black w3-hover-text-black" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
+          <a href="" class="dropdown-item w3-hover-text-black w3-hover-text-black" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-lock mr-2"></i>
            Logout
           </a>
-          <!-- <div class="dropdown-item" id="logout_link">
-          
-                <a class="dropdown-item text-white"  href="" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>&nbsp;
-                        Logout
-                </a> -->
 
-                <form id="logout-form" action="{{route('logout')}}" method="post" class="d-none">
-                   @csrf
-                </form>
           </div>
         </div>
 
@@ -135,6 +129,31 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+
+   <!--start of Logout modal -->
+          <div class="modal" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm text-center">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h5>Logout your account</h5>
+                </div>
+                <div class="modal-body">
+                  <p><i class="fa fa-question-circle"></i>Are you sure , you want to log-off ? <br /></p>
+                  <div class="actionsBtns">
+                      
+                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                          <a href="" onclick="event.preventDefault(),document.getElementById('logoutID').submit()" class="btn btn-primary"><i class="fa fa-lock"></i>&nbsp;Logout</a>
+                          <button class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>  Cancel</button>
+                      <form id="logoutID" action="{{route('logout')}}" method="post">
+                        @csrf
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         <!--end of logout modal-->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -161,7 +180,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{url('es/dashboard')}}" class="nav-link">
+            <a href="{{url('user/dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -183,42 +202,42 @@
             <ul class="nav nav-treeview">
       
               <li class="nav-item">
-                  <a href="{{url('es/citizen/complains')}}" class="nav-link">
+                  <a href="{{url('user/citizen/complains')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Home</p>
                   </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/unsolved/complains')}}" class="nav-link">
+                <a href="{{url('user/unsolved/complains')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>About</p>
                 </a>
               </li>
 
                <li class="nav-item">
-                <a href="{{url('es/solved/complains')}}" class="nav-link">
+                <a href="{{url('user/solved/complains')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Activity</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/solved/complains')}}" class="nav-link">
+                <a href="{{url('user/solved/complains')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>muslims</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/solved/complains')}}" class="nav-link">
+                <a href="{{url('user/solved/complains')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>gallery</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/solved/complains')}}" class="nav-link">
+                <a href="{{url('user/solved/complains')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>contact</p>
                 </a>
@@ -245,14 +264,14 @@
             <ul class="nav nav-treeview">
       
               <li class="nav-item">
-                <a href="{{url('es/viewstaff')}}" class="nav-link">
+                <a href="{{url('user/viewstaff')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add copy</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/viewstaff')}}" class="nav-link">
+                <a href="{{url('user/viewstaff')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View copies</p>
                 </a>
@@ -276,14 +295,14 @@
             <ul class="nav nav-treeview">
       
               <li class="nav-item">
-                <a href="{{url('es/form/document')}}" class="nav-link">
+                <a href="{{url('user/form/document')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add documents(files)</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{url('es/view/document')}}" class="nav-link">
+                <a href="{{url('user/view/document')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View my files</p>
                 </a>
@@ -305,7 +324,7 @@
             <ul class="nav nav-treeview">
       
               <li class="nav-item">
-                <a href="{{url('es/information')}}" class="nav-link">
+                <a href="{{url('user/information')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>My infos</p>
                 </a>

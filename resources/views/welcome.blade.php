@@ -22,11 +22,27 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style/login.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    
+    <style>
+/*        #login_form input[type="email"],input[type="password"]{
+            border-radius:5px;
+            margin-bottom:10px;
+            border:none;
+            border-bottom:2px solid gray;
+        }*/
+    </style>
   </head>
   <body>
+    @if(session('wrong_login'))
+        <script type="text/javascript">toastr.error('Wrong Credentials , try again !');</script>
+    @endif
       <div class="py-2 bg-primary">
         <div class="container">
-            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0" style="border" >
                 <div class="col-lg-12 d-block">
                     <div class="row d-flex">
                         <div class="col-md-5 pr-4 d-flex topper align-items-center">
@@ -56,7 +72,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{{url('/')}}" class="nav-link pl-0"><i class="icon-home"></i>&nbsp;Home</a></li>
                 <li class="nav-item"><a href="{{url('activity')}}" class="nav-link"><i class="icon-cogs"></i>&nbsp;Activity</a></li>
-                <li class="nav-item"><a href="{{url('muslims')}}" class="nav-link"><i class="icon-users"></i>&nbsp;All muslims</a></li>
+                <li class="nav-item"><a href="{{route('muslims')}}" class="nav-link"><i class="icon-users"></i>&nbsp;All muslims</a></li>
                 <li class="nav-item"><a href="{{url('gallery')}}" class="nav-link"><i class="icon-image"></i>&nbsp;Gallery</a></li>
               <li class="nav-item"><a href="{{url('contact')}}" class="nav-link"><i class="icon-phone"></i>&nbsp;Contact</a></li>
               <li class="nav-item d-flex"><a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal"><i class="icon-user"></i>&nbsp;Login</a></li>
@@ -473,12 +489,24 @@
                   <h5>Login here</h5>
                 </div>
                 <div class="modal-body">
-                  <!-- <p><i class="fa fa-question-circle"></i>Are you sure , you want to log-off ? <br /></p> -->
-                  <form class="form-group" method="POST" action="{{url('test')}}">
+                  <form class="form-group" id="login_form" method="POST" action="{{url('test')}}">
                     @csrf
-                      <input type="text" name="email" class="form-control"><br>
-                      <input type="password" name="password" class="form-control">
-                      <button class="btn btn-primary" type="submit">Login</button>
+                      <!-- <input type="email" name="email" class="form-control" placeholder="Enter email">
+                      <input type="password" name="password" class="form-control" placeholder="Enter password">
+                       -->
+                       <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                        <input class="input100" type="email" name="email" autofocus id="emailid">  
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                      </div>
+
+                      <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                          <i class="icon-eye"></i>
+                        </span>
+                        <input class="input100" type="password" name="password" id="passid">  
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                      </div>
+                      <button class="btn btn-primary" type="submit"><i class="icon-lock"></i> Login</button>
                   </form>
                   <p><i class="text-center text-primary"></i>Forgot password <br /></p>
 
@@ -899,7 +927,30 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+  <script>
 
+(function ($) {
+    "use strict";
+
+    var showPass = 0;
+    $('.btn-show-pass').on('click', function(){
+        if(showPass == 0) {
+            $(this).next('input').attr('type','text');
+            $(this).find('i').removeClass('icon-eye');
+            $(this).find('i').addClass('icon-eye-off');
+            showPass = 1;
+        }
+        else {
+            $(this).next('input').attr('type','password');
+            $(this).find('i').addClass('icon-eye');
+            $(this).find('i').removeClass('icon-eye-off');
+            showPass = 0;
+        }
+        
+    });
+})(jQuery);
+
+  </script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>

@@ -25,7 +25,7 @@ class AuthController extends Controller
         if (auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             return redirect(route('homepage'));
         }else{
-            return "Login fail !";
+            return redirect()->back()->with('wrong_login','');
         }
 
     }
