@@ -82,12 +82,25 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('changeprofile')}}" method="POST" enctype="multipart/form-data">
+        <!-- <form action="{{route('changeprofile')}}" method="POST" enctype="multipart/form-data">
             @csrf            
             <img src="{{asset('images/admin/'.auth()->guard('user')->user()->image)}}" id="blah" style="width:120px;height:120px;"/><br>
             <input name="profile_picture" type="file" accept="image/*" id="imgInp" class="form-control" required><br>
             <button class="btn btn-primary" type="submit" name="submit"><i class="fa fa-save"></i>&nbsp; Save changes</button>
-        </form>
+        </form> -->
+
+            
+            <div id="upload-demo"></div>
+            <strong>Select image to crop:</strong>
+            <input type="file" id="image">
+
+            <button class="btn btn-success btn-block btn-upload-image" style="margin-top:2%">Cropping Image</button>
+
+              <form method="POST">
+                <div id="preview-crop-image" style="background:#9d9d9d;width:300px;padding:50px 50px;height:300px;"></div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -102,6 +115,52 @@ imgInp.onchange = evt => {
     blah.src = URL.createObjectURL(file)
   }
 }
+
+
+var resize = $('#upload-demo').croppie({
+    enableExif: true,
+    enableOrientation: true,    
+    viewport: { // Default { width: 100, height: 100, type: 'square' } 
+        width: 200,
+        height: 200,
+        type: 'circle' //square
+    },
+    boundary: {
+        width: 300,
+        height: 300
+    }
+});
+
+
+$('#image').on('change', function () { 
+  var reader = new FileReader();
+    reader.onload = function (e) {
+      resize.croppie('bind',{
+        url: e.target.result
+      }).then(function(){
+        console.log('jQuery bind complete');
+      });
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+
+
+$('.btn-upload-image').on('click', function (ev) {
+  resize.croppie('result', {
+    type: 'canvas',
+    size: 'viewport'
+  }).then(function (img) {
+    $.ajax({
+      url: "croppie.php",
+      type: "POST",
+      data: {"image":img},
+      success: function (data) {
+        html = '<img src="' + img + '" />';
+        $("#preview-crop-image").html(html);
+      }
+    });
+  });
+});
 </script>
 
 @endsection

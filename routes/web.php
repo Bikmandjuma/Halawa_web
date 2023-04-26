@@ -42,7 +42,7 @@ Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
         Route::get('password','PasswordForm')->name('passform');
         Route::post('Submitpswdform','CreatePassword')->name('changepassword');
         Route::post('Submitprofilform','CreateProfile')->name('changeprofile');
-        Route::get('profile','ShowProfile');
+        Route::get('profile','ShowProfile')->name('profile');
         Route::post('EditInfo/{id}','UpdateInfo')->name('editinfo');
     });
 });

@@ -54,7 +54,9 @@ $id=auth()->guard('user')->user()->id;
               <div class="card-body" style="overflow: auto;">
                       <div class="row">
                         <div class="col-sm-6 text-center">
+                          <a href="{{route('profile')}}" onclick="$(window).bind('unload', function(){});" >
                             <img src="{{asset('images/admin/'.auth()->guard('user')->user()->image)}}" class="img-circle elevation-2" alt="User Image" style="width:80px;height:80px;border:2px solid skyblue;">
+                          </a>
                         </div>
 
                         <div class="col-sm-6">
