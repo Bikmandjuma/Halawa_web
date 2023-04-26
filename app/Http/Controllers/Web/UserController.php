@@ -60,11 +60,19 @@ class UserController extends Controller
         ]);
 
         $rancodes=rand(0,100000);
-        $file= $request->file('profile_picture');
-        $filename= $rancodes.'_'.date('YmdHi').$file->getClientOriginalName();
-        $extenstion = $file->getClientOriginalExtension();
-        $file-> move(public_path('images/admin/'), $filename);
-        $profile=User::find($id)->update(['image'=>$filename]);
+        $image= $request->file('image');
+        list($type, $image) = explode(';',$image);
+        list(, $image) = explode(',',$image);
+
+        $image = base64_decode($image);
+        $image_name = time().'.png';
+        file_put_contents(public_path('images/admin/').$image_name, $image);
+
+        // $file= $request->file('profile_picture');
+        // $filename= $rancodes.'_'.date('YmdHi').$file->getClientOriginalName();
+        // $extenstion = $file->getClientOriginalExtension();
+        // $file-> move(public_path('images/admin/'), $filename);
+        $profile=User::find($id)->update(['image'=>$image]);
 
         if ($profile) {
             return redirect()->back()->with('profile_changed','profile changed  successfully !');

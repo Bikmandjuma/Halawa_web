@@ -91,15 +91,18 @@
 
             
             <div id="upload-demo"></div>
-            <strong>Select image to crop:</strong>
-            <input type="file" id="image">
+            <form action="{{route('changeprofile')}}" method="POST">
+              @csrf
+                <div id="preview-crop-image">
+                  <input type="file" id="image">
+                </div>
+                <button class="btn btn-success btn-block btn-upload-image" type="submit" style="margin-top:2%">Save image</button>
+            </form>
 
-            <button class="btn btn-success btn-block btn-upload-image" style="margin-top:2%">Cropping Image</button>
-
-              <form method="POST">
+             <!--  <form method="POST">
                 <div id="preview-crop-image" style="background:#9d9d9d;width:300px;padding:50px 50px;height:300px;"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+              </form> -->
 
       </div>
       <div class="modal-footer">
@@ -109,12 +112,12 @@
   </div>
 </div>
 <script type="text/javascript">
-imgInp.onchange = evt => {
-  const [file] = imgInp.files
-  if (file) {
-    blah.src = URL.createObjectURL(file)
-  }
-}
+// imgInp.onchange = evt => {
+//   const [file] = imgInp.files
+//   if (file) {
+//     blah.src = URL.createObjectURL(file)
+//   }
+// }
 
 
 var resize = $('#upload-demo').croppie({
@@ -126,8 +129,8 @@ var resize = $('#upload-demo').croppie({
         type: 'circle' //square
     },
     boundary: {
-        width: 300,
-        height: 300
+        width: 250,
+        height: 250
     }
 });
 
@@ -151,7 +154,7 @@ $('.btn-upload-image').on('click', function (ev) {
     size: 'viewport'
   }).then(function (img) {
     $.ajax({
-      url: "croppie.php",
+      url: "user/Submitprofilform",
       type: "POST",
       data: {"image":img},
       success: function (data) {
