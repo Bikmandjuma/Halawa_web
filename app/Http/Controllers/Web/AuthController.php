@@ -23,9 +23,9 @@ class AuthController extends Controller
         ]);
 
         if (auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            return redirect(route('homepage'));
+            return redirect(route('homepage'))->with('WelcomeAuthUser','message goes here');
         }else{
-            return redirect()->back()->with('wrong_login','');
+            return redirect()->back()->with('wrong_login','wrong credentials !');
         }
 
     }

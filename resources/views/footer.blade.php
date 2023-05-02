@@ -1,4 +1,4 @@
-@yield('content')
+@yield('FooterContent')
  <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -45,11 +45,13 @@
             <div class="ftco-footer-widget mb-5 ml-md-4">
               <h2 class="ftco-heading-2">Links</h2>
               <ul class="list-unstyled">
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>About</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Services</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Deparments</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
+                <li><a href="{{url('/')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
+                <li><a href=""><span class="ion-ios-arrow-round-forward mr-2"></span>Activities</a></li>
+                <li><a href="{{route('muslims')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Muslims</a></li>
+                <li><a href="{{url('gallery')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Gallery</a></li>
+                <li><a href="{{url('contact')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
+                <li><a href="{{route('CheckEmailFirst')}}" id="SelfRegister"><span class="ion-ios-arrow-round-forward mr-2"></span>Djamat's member registration</a></li>
+                <li><a href="" data-toggle="modal" data-target="#logoutModal"><span class="ion-ios-arrow-round-forward mr-2"></span>Login</a></li>
               </ul>
             </div>
           </div>
@@ -63,22 +65,19 @@
                 </div>
               </form>
             </div>
-            <div class="ftco-footer-widget mb-5">
+            <!-- <div class="ftco-footer-widget mb-5">
                 <h2 class="ftco-heading-2 mb-0">Connect With Us</h2>
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon icon-envelope"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon icon-whatsapp"></span></a></li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by Bikman djuma
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            <p>Copyright &copy; 2016 - <script>document.write(new Date().getFullYear());</script> All rights reserved by Halawat al-iman (IPRC TUMBA)</p>
           </div>
         </div>
       </div>

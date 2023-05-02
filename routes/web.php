@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\GuestController;
 
 
 /*
@@ -33,6 +34,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout','Logout')->name('logout');
 });
 
+Route::controller(GuestController::class)->group(function(){
+    Route::get('Register_Muslim','Show_Register_Muslim');
+    Route::post('RegisterMuslim','Register_Muslim');
+    Route::get('checkemail','MuslimCheckEmail')->name('CheckEmailFirst');
+    Route::post('CreateCheckemail','CreateCheckEmail')->name('CreateCheckEmail');
+});
 
 Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
     Route::controller(UserController::class)->group(function(){

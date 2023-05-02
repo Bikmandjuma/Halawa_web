@@ -1,4 +1,20 @@
 <!DOCTYPE html>
+<?php
+use App\Models\User;
+
+$allmuslim=User::all();
+$allmuslim_count=collect($allmuslim)->count();
+
+$muslim_still_studying=User::all()->where('study_status','still_studying');
+$muslim_still_studying_count=collect($muslim_still_studying)->count();
+
+$boys_muslim_still_studying=User::all()->where('study_status','still_studying')->where('gender','male');
+$boys_muslim_still_studying_count=collect($boys_muslim_still_studying)->count();
+
+$girls_muslim_still_studying=User::all()->where('study_status','still_studying')->where('gender','female');
+$girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count();
+
+?>
 <html lang="en">
   <head>
   <title>{{ config('app.name', '') }}</title>
@@ -23,6 +39,7 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="style/login.css">
+    
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
@@ -122,20 +139,16 @@
         </div>
         </div>
       </div>
-
+<!-- 
       <div class="slider-item" style="background-image:url(images/bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-8 text-center ftco-animate">
-            <!-- <h1 class="mb-4">Halawat al-iman <span>Muslims of Iprc tumba</span></h1> -->
-            
-            <!-- <h1 class="mb-4">Perfect Learned<span> For Your Child</span></h1> -->
-            <!-- <p><a href="#" class="btn btn-secondary px-4 py-3 mt-3">Read More</a></p> -->
           </div>
         </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <section class="ftco-services ftco-no-pb">
@@ -422,7 +435,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section heading-section-black ftco-animate">
-            <h2 class="mb-4"><span>20 Years of</span> Experience</h2>
+            <h2 class="mb-4"><span><?php echo date('Y')-2016;?> Years of </span> Working</h2>
             <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
           </div>
         </div>  
@@ -433,8 +446,8 @@
                     <div class="block-18">
                         <div class="icon"><span class="flaticon-doctor"></span></div>
                       <div class="text">
-                        <strong class="number" data-number="18">0</strong>
-                        <span>Certified Teachers</span>
+                        <strong class="number" data-number="{{$allmuslim_count}}">0</strong>
+                        <span>All muslims</span>
                       </div>
                     </div>
                   </div>
@@ -442,8 +455,8 @@
                     <div class="block-18">
                         <div class="icon"><span class="flaticon-doctor"></span></div>
                       <div class="text">
-                        <strong class="number" data-number="351">0</strong>
-                        <span>Successful Kids</span>
+                        <strong class="number" data-number="{{$muslim_still_studying_count}}">0</strong>
+                        <span>Muslims still studying</span>
                       </div>
                     </div>
                   </div>
@@ -451,8 +464,8 @@
                     <div class="block-18">
                         <div class="icon"><span class="flaticon-doctor"></span></div>
                       <div class="text">
-                        <strong class="number" data-number="564">0</strong>
-                        <span>Happy Parents</span>
+                        <strong class="number" data-number="{{$boys_muslim_still_studying_count}}">0</strong>
+                        <span>Boys still studying</span>
                       </div>
                     </div>
                   </div>
@@ -460,8 +473,8 @@
                     <div class="block-18">
                         <div class="icon"><span class="flaticon-doctor"></span></div>
                       <div class="text">
-                        <strong class="number" data-number="300">0</strong>
-                        <span>Awards Won</span>
+                        <strong class="number" data-number="{{$girls_muslim_still_studying_count}}">0</strong>
+                        <span>Girls still studying</span>
                       </div>
                     </div>
                   </div>
@@ -522,7 +535,6 @@
          <!--end of logout modal-->
 
         <?php
-            use App\Models\User;
             $user=User::all();
         ?>
         @foreach($user as $data)
@@ -827,7 +839,7 @@
                     </div>
                     <div class="col-md-3 ftco-animate">
                         <a href="images/image_4.jpg" class="gallery image-popup img d-flex align-items-center" style="background-image: url(images/image_4.jpg);">
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
                             <span class="icon-instagram"></span>
                         </div>
                         </a>
@@ -836,94 +848,10 @@
         </div>
     </section>
 
-        
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-5">
-                <h2 class="ftco-heading-2">Have a Questions?</h2>
-                <div class="block-23 mb-3">
-                  <ul>
-                    <li><span class="icon icon-map-marker"></span><span class="text">Bugarama,nyange,Mubogora</span></li>
-                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+250787943106</span></a></li>
-                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">zerocool@yourdomain.com</span></a></li>
-                  </ul>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-5">
-              <h2 class="ftco-heading-2">Recent Blog</h2>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Dec 25, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-5 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Dec 25, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-5 ml-md-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Home</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>About</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Services</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Deparments</a></li>
-                <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-5">
-                <h2 class="ftco-heading-2">Subscribe Us!</h2>
-              <form action="#" class="subscribe-form">
-                <div class="form-group">
-                  <input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
-                  <input type="submit" value="Subscribe" class="form-control submit px-3">
-                </div>
-              </form>
-            </div>
-            <div class="ftco-footer-widget mb-5">
-                <h2 class="ftco-heading-2 mb-0">Connect With Us</h2>
-                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by Bikman djuma
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    @extends('footer')
+    @section('FooterContent')
+    @endsection
     
-  
-
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
@@ -936,14 +864,14 @@
     $('.btn-show-pass').on('click', function(){
         if(showPass == 0) {
             $(this).next('input').attr('type','text');
-            $(this).find('i').removeClass('icon-eye');
-            $(this).find('i').addClass('icon-eye-off');
+            $(this).find('i').removeClass('zmdi-eye');
+            $(this).find('i').addClass('icon-eye');
             showPass = 1;
         }
         else {
             $(this).next('input').attr('type','password');
             $(this).find('i').addClass('icon-eye');
-            $(this).find('i').removeClass('icon-eye-off');
+            $(this).find('i').removeClass('zmdi-eye');
             showPass = 0;
         }
         

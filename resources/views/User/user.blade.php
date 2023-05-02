@@ -1,6 +1,9 @@
 @extends('User.Cover')
 @section('content')
 <div class="container">
+  @if(session('WelcomeAuthUser'))
+      <script type="text/javascript">toastr.success("Assalam aalaikum ya {{auth()->guard('user')->user()->firstname}} {{auth()->guard('user')->user()->lastname}}");</script>
+  @endif
     <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
