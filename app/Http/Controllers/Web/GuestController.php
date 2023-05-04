@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\CheckEmailBeforeSelfRegistration;
 
 class GuestController extends Controller
 {
@@ -66,10 +67,16 @@ class GuestController extends Controller
         $req->validate([
             'email' => 'required|email|unique:users'
         ],[
-            'email.unique' => 'This email already registered !'
+            'email.unique' => 'This email already used !',
+            'email.required' => 'Please fill email field !'
         ]);
 
-        return view('CheckCode');
+        $code=rand(0,999999);
+
+        $email=$req->email;
+
+
+        // return view('CheckCode');
     }
 
 }

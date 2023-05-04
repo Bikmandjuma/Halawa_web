@@ -23,6 +23,14 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <style type="text/css">
+      #errormsg{
+        margin-top: -5%;
+      }
+
+      .alert{
+        padding: 15px;
+        margin-bottom: 20px;border-radius: 4px;color: #fff;text-transform: uppercase;font-size: 12px}.alert_info{background-color: #4285f4;border: 2px solid #4285f4}button.close{-webkit-appearance: none;padding: 0;cursor: pointer;background: 0 0;border: 0}.close{font-size: 20px;color: #fff;opacity: 0.9;}.alert_success{background-color: #09c97f;border: 2px solid #09c97f}.alert_warning{background-color: #f8b15d;border: 2px solid #f8b15d}.alert_error{background-color: #f95668;border: 2px solid #f95668}.fade_info{background-color: #d9e6fb;border: 1px solid #4285f4}.fade_info .close{color: #4285f4}.fade_info strong{color: #4285f4}.fade_success{background-color: #c9ffe5;border: 1px solid #09c97f}.fade_success .close{color: #09c97f}.fade_success strong{color: #09c97f}.fade_warning{background-color: #fff0cc;border: 1px solid #f8b15d}.fade_warning .close{color: #f8b15d}.fade_warning strong{color: #f8b15d}.fade_error{background-color: #ffdbdb;border: 1px solid #f95668}.fade_error .close{color: #f95668}.fade_error strong{color: #f95668}
+
       .card_profile{
         justify-content: center;
         display: flex;
@@ -61,7 +69,7 @@
           font-family: serif;
       }
 
-      .containers form input[type="email"]{
+      .containers form input[type="number"]{
         border: none;
         border: 1px solid skyblue;
         border-radius: 50px;
@@ -126,7 +134,8 @@
                       <div class="containers">
                         <br>
                         <form>
-                          <input type="number" name="code" placeholder="Enter code" class="form-control">
+                          <input type="number" placeholder="Enter code" id="myKadA"class="form-control" onkeydown="limit(this, 6);" onkeyup="limit(this, 6);" onkeyup="this.value = minmax(this.value, 0, 6)" required>
+
                           <br>
                           <button style="margin-bottom:5px;" class="btn btn-info image" type="file" name="image"><i class="fa fa-edit"></i>&nbsp;Check code</button>
                         </form>

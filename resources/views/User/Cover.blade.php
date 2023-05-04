@@ -289,7 +289,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-folder"></i>
               <p>
-                Personal files
+                Djamat files
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

@@ -127,4 +127,8 @@ class UserController extends Controller
         return redirect(route('myinformation'))->with('status','Data updated successfully !');
     }
 
+    public function DocForm(){
+        return view('User.FormDocument');
+    }
+
 }

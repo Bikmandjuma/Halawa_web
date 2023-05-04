@@ -7,10 +7,12 @@
         font-weight: bold;
         font-size:23px;
     }
+
     img {
         display: block;
         max-width: 100%;
     }
+
     .preview {
         text-align: center;
         overflow: hidden;
@@ -92,7 +94,8 @@
               <div class="container">
                 <h4><b>{{auth()->guard('user')->user()->firstname}}&nbsp;{{auth()->guard('user')->user()->lastname}}</b></h4> 
                
-                <button style="margin-bottom:5px;" class="btn btn-info image" type="file" name="image"><i class="fa fa-edit"></i>&nbsp;Edit</button>
+                <!-- <button style="margin-bottom:5px;" class="btn btn-info image" type="file" name="image"><i class="fa fa-edit"></i>&nbsp;Edit</button> -->
+                <input type="file" name="image" class="image">
               </div>
           </div>
       </div>
