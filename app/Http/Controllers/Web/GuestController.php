@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CheckEmailBeforeSelfRegistration;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendCodeToCheckEmail;
+use Illuminate\Mail\Mailable;
 
 class GuestController extends Controller
 {
@@ -71,12 +74,18 @@ class GuestController extends Controller
             'email.required' => 'Please fill email field !'
         ]);
 
-        $code=rand(0,999999);
+        //delete data of user-email already set
+        CheckEmailBeforeSelfRegistration::where('email',$req->email)->delete();
 
-        $email=$req->email;
 
+        $code['code']=mt_rand(100000,999999);
 
-        // return view('CheckCode');
+        $CodeData=CheckEmailBeforeSelfRegistration::create($code);
+
+        //send email to user
+        mail::to($req->email)->send(new SendCodeToCheckEmail($CodeData->code));
+
+        return response()->with('emailCheckCode','we sent code on your email');
     }
 
 }
