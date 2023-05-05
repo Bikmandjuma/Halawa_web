@@ -34,12 +34,13 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(GuestController::class)->group(function(){
-    Route::get('Register_Muslim','Show_Register_Muslim');
+    Route::get('Register_Muslim','Show_Register_Muslim')->name('muslim_self_register');
     Route::post('RegisterMuslim','Register_Muslim');
     Route::get('checkemail','MuslimCheckEmail')->name('CheckEmailFirst');
     Route::post('CreateCheckemail','CreateCheckEmail')->name('CreateCheckEmail');
-    Route::get('checkcode','MuslimCheckCode')->name('CheckCodeFirst');
+    Route::get('/checkcode/{email}','MuslimCheckCode')->name('CheckCodeFirst');
     Route::post('CreateCheckCode','CreateCheckCode')->name('CreateCheckCode');
+    Route::get('/ResendCode/{email}','ResendCode')->name('ResendCode');
 });
 
 Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){

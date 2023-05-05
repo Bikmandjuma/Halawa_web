@@ -151,7 +151,7 @@
                       <br>
                       <form action="{{route('CreateCheckEmail')}}" method="POST">
                           @csrf
-                          <input type="email" name="email" placeholder="Enter email"  value="{{old('email')}}" class="form-control"><br>
+                          <input type="email" name="email" value="{{old('email')}}" placeholder="Enter email"  value="{{old('email')}}" class="form-control"><br>
                           <!-- <span style="color:red;" >@error('email') {{$message}} @enderror</span> -->
                           <button style="margin-bottom:5px;" class="btn btn-info image" name="image">Check email</button>
                       </form> 

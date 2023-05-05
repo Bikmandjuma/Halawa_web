@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CheckEmailBeforeSelfRegistration;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendCodeToCheckEmail;
 use Illuminate\Mail\Mailable;
 
@@ -89,7 +90,10 @@ class GuestController extends Controller
         //send email to user
         Mail::to($req->email)->send(new SendCodeToCheckEmail($code));
 
-        return redirect(route('CheckCodeFirst'))->with('emailCheckCode','we sent code on your email');
+        return redirect(url('/checkcode/'.encrypt($email)))->with([
+            'emailCheckCode' =>'we sent you a code on your email !',
+            'email' => $email
+        ]);
     }
 
     public function MuslimCheckCode(){
@@ -98,11 +102,41 @@ class GuestController extends Controller
 
     public function CreateCheckCode(Request $req){
         $req->validate([
-            'code' => 'required|string|between:6,6|exists:check_email_before_self_registration,code'
+            'code' => 'required|string|between:6,6|exists:check_email_before_self_registrations,code'
         ],[
             'code.required' => 'Please fill code field !',
-            'code.between' => 'code must be 6 characters !'
+            'code.between' => 'code must be 6 characters !',
+            'code.exists' => 'the code entered is invalid ,check your email !'
         ]);
+
+        return redirect(route('muslim_self_register'))->with('register','fill the following field !');
+    }
+
+    public function ResendCode($email){
+
+        //delete data of user-email already set
+        CheckEmailBeforeSelfRegistration::where('email',$email)->delete();
+
+
+        $code=mt_rand(100000,999999);
+        $emails=$email;
+
+        CheckEmailBeforeSelfRegistration::create([
+            'email' =>$emails,
+            'code' => $code
+        ]);
+
+        //send email to user
+        Mail::to($emails)->send(new SendCodeToCheckEmail($code));
+
+        return redirect(url('/checkcode/'.encrypt($emails)))->with([
+            'emailCheckCode' =>'we sent you a code on your email !',
+            'email' => $emails
+        ]);
+    }
+
+    public function Show_Register_Muslim(){
+        return view('SelfRegistration');
     }
 
 }
