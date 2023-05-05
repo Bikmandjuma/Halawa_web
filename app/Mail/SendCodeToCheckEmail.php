@@ -22,8 +22,7 @@ class SendCodeToCheckEmail extends Mailable
 
     public function build()
     {
-        return $this->subject('Mail from halawat-al-iman')
-                    ->view('emails.send-code_to_check_email');
+        return $this->markdown('emails.send_code_to_check_email');
     }
 
     /**

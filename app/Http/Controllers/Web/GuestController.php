@@ -78,14 +78,31 @@ class GuestController extends Controller
         CheckEmailBeforeSelfRegistration::where('email',$req->email)->delete();
 
 
-        $code['code']=mt_rand(100000,999999);
+        $code=mt_rand(100000,999999);
+        $email=$req->email;
 
-        $CodeData=CheckEmailBeforeSelfRegistration::create($code);
+        CheckEmailBeforeSelfRegistration::create([
+            'email' =>$email,
+            'code' => $code
+        ]);
 
         //send email to user
-        mail::to($req->email)->send(new SendCodeToCheckEmail($CodeData->code));
+        Mail::to($req->email)->send(new SendCodeToCheckEmail($code));
 
-        return response()->with('emailCheckCode','we sent code on your email');
+        return redirect(route('CheckCodeFirst'))->with('emailCheckCode','we sent code on your email');
+    }
+
+    public function MuslimCheckCode(){
+        return view('CheckCode');
+    }
+
+    public function CreateCheckCode(Request $req){
+        $req->validate([
+            'code' => 'required|string|between:6,6|exists:check_email_before_self_registration,code'
+        ],[
+            'code.required' => 'Please fill code field !',
+            'code.between' => 'code must be 6 characters !'
+        ]);
     }
 
 }

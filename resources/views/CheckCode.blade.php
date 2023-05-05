@@ -121,10 +121,38 @@
     </nav>
     
     <section class="ftco-section contact-section"  style="background-color:#eee;">
+
+      <div class="row" id="errormsg">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @if($errors->any())
+                  @foreach($errors->all() as $error)
+                      <div class="alert btn-danger alert-dismissible fade show text-center" role="alert">
+                            {{$error}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true" style="font-size:25px;">&times;</span>
+                            </button>
+                      </div>
+                  @endforeach
+            @endif
+
+            @if(session('emailCheckCode'))
+                <div class="alert btn-success alert-dismissible fade show text-center" role="alert">
+                            {{session('emailCheckCode')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="font-size:25px;">&times;</span>
+                  </button>
+                </div>
+            @endif
+            
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
       <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6 text-center">
-            
+              
                <div class="card_profile">  
                   <div class="card">              
                       <div class="card_title">
@@ -133,11 +161,11 @@
 
                       <div class="containers">
                         <br>
-                        <form>
-                          <input type="number" placeholder="Enter code" id="myKadA"class="form-control" onkeydown="limit(this, 6);" onkeyup="limit(this, 6);" onkeyup="this.value = minmax(this.value, 0, 6)" required>
-
+                        <form action="{{route('CreateCheckCode')}}" method="POST">
+                          @csrf
+                          <input type="number" placeholder="Enter code" value="{{old('code')}}" name="code" class="form-control">
                           <br>
-                          <button style="margin-bottom:5px;" class="btn btn-info image" type="file" name="image"><i class="fa fa-edit"></i>&nbsp;Check code</button>
+                          <button style="margin-bottom:5px;" class="btn btn-info" type="submit"><i class="fa fa-code"></i>&nbsp;Check code</button>
                         </form>
                         <br>
                       </div>

@@ -5,7 +5,6 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\GuestController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +38,8 @@ Route::controller(GuestController::class)->group(function(){
     Route::post('RegisterMuslim','Register_Muslim');
     Route::get('checkemail','MuslimCheckEmail')->name('CheckEmailFirst');
     Route::post('CreateCheckemail','CreateCheckEmail')->name('CreateCheckEmail');
+    Route::get('checkcode','MuslimCheckCode')->name('CheckCodeFirst');
+    Route::post('CreateCheckCode','CreateCheckCode')->name('CreateCheckCode');
 });
 
 Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
@@ -52,6 +53,5 @@ Route::group(['prefix'=>'user','middleware'=>'userauth'],function(){
         Route::get('profile','ShowProfile')->name('profile');
         Route::post('EditInfo/{id}','UpdateInfo')->name('editinfo');
         Route::get('form/document','DocForm');
-
     });
 });
