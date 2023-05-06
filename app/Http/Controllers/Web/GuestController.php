@@ -78,7 +78,6 @@ class GuestController extends Controller
         //delete data of user-email already set
         CheckEmailBeforeSelfRegistration::where('email',$req->email)->delete();
 
-
         $code=mt_rand(100000,999999);
         $email=$req->email;
 

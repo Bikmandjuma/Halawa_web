@@ -62,7 +62,7 @@
                 <li class="nav-item"><a href="{{url('activity')}}" class="nav-link"><i class="icon-cogs"></i>&nbsp;Activity</a></li>
                 <li class="nav-item"><a href="{{route('muslims')}}" class="nav-link"><i class="icon-users"></i>&nbsp;All muslims</a></li>
                 <li class="nav-item"><a href="{{url('gallery')}}" class="nav-link"><i class="icon-image"></i>&nbsp;Gallery</a></li>
-              <li class="nav-item active"><a href="{{url('contact')}}" class="nav-link"><i class="icon-phone"></i>&nbsp;Contact</a></li>
+              <li class="nav-item"><a href="{{url('contact')}}" class="nav-link"><i class="icon-phone"></i>&nbsp;Contact</a></li>
               <li class="nav-item d-flex"><a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal"><i class="icon-user"></i>&nbsp;Login</a></li>
 	        </ul>
 	      </div>
@@ -82,15 +82,15 @@
       </div>
     </section>
 
-        @if(session('register'))
+        @if(session('registers'))
             <div class="alert btn-success alert-dismissible fade show text-center" role="alert">
-                  {{session('register')}}
+                  {{session('registers')}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true" style="font-size:25px;">&times;</span>
               </button>
             </div>
         @endif
-
+    <br>
     <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(images/bg_5.jpg);" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row justify-content-end">
