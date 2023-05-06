@@ -198,7 +198,7 @@ button:focus {
 
 input,
 button,
-select,
+/*select,*/
 optgroup,
 textarea {
   margin: 0;
@@ -1634,7 +1634,7 @@ pre {
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1; }
-
+/*
 select.form-control:focus::-ms-value {
   color: #495057;
   background-color: #fff; }
@@ -1691,7 +1691,7 @@ select.form-control:focus::-ms-value {
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem; }
-
+*/
 select.form-control[size], select.form-control[multiple] {
   height: auto; }
 
