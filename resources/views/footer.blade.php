@@ -1,5 +1,63 @@
 @yield('FooterContent')
+<?php
+use App\Models\EnableSelfRegistration;
+use App\Models\User;
+$EnableRegister=EnableSelfRegistration::all()->where('status','Enable');
+$count_Enable_reg=collect($EnableRegister)->count();
+
+$Admin=User::all()->where('role','admin');
+$Amir=User::all()->where('role','amir');
+
+?>
  <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <style type="text/css">
+      #contact_links a{
+        color:black;
+      }
+
+    </style>
+    <!--start of Register modal -->
+          <div class="modal" id="RegisterModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm text-center">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h5><u>Register link is disabled</u></h5>
+                </div>
+                <div class="modal-body text-center align-center">
+                  <p style="color:black;"><i class="fa fa-question-circle"></i>Please click link bellow to contact admin or amir to enable registration's link . <i class="icon-thumb-down"></i> </p><br />
+                    <span id="contact_links">
+                      <a href="#Admin" id="admin" onclick="adminfn()">Admin</a>&nbsp;|&nbsp;<a href="#Amir" id="amir" onclick="amirfn()">Amir</a></span>
+                    <br />
+                    <br />
+                  <div id="adminx" style="display: none;">
+                      @foreach($Admin as $admin)
+                        <img src="{{asset('images/admin/'.$admin->image)}}" style="width:100px;height:100px;border-radius:50%;border: 1px solid skyblue;">
+                        <br />
+                        <h6 style="color:black;padding: 5px;">{{$admin->firstname}}&nbsp;{{$admin->lastname}}</h6>
+                        <a href="tel:{{$admin->phone}}" class="btn btn-primary" title="call"><i class="icon-phone"></i></a>
+                        <a href="https://wa.me/{{$admin->phone}}" class="btn btn-success" title="whatsapp"><i class="icon-whatsapp"></i></a>
+                        <a href="mailto:{{$admin->email}}" class="btn btn-secondary" title="email"><i class="icon-paper-plane"></i></a>
+                      @endforeach
+                  </div>
+
+                  <div id="amirx" style="display: none;">
+                       @foreach($Amir as $amir)
+                        <img src="{{asset('images/admin/'.$amir->image)}}" style="width:100px;height:100px;border-radius:50%;border: 1px solid skyblue;">
+                        <br />
+                        <h6 style="color:black;padding: 5px;">{{$amir->firstname}}&nbsp;{{$amir->lastname}}</h6>
+                        <a href="tel:{{$amir->phone}}" class="btn btn-primary" title="call"><i class="icon-phone"></i></a>
+                        <a href="https://wa.me/{{$amir->phone}}" class="btn btn-success" title="whatsapp"><i class="icon-whatsapp"></i></a>
+                        <a href="mailto:{{$amir->email}}" class="btn btn-secondary" title="email"><i class="icon-paper-plane"></i></a>
+                      @endforeach
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end of Register modal-->
+
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3">
@@ -50,7 +108,24 @@
                 <li><a href="{{route('muslims')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Muslims</a></li>
                 <li><a href="{{url('gallery')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Gallery</a></li>
                 <li><a href="{{url('contact')}}"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
-                <li><a href="{{route('CheckEmailFirst')}}" id="SelfRegister"><span class="ion-ios-arrow-round-forward mr-2"></span>Djamat's member registration</a></li>
+                
+                @if($count_Enable_reg == 0)
+                  
+                  <style>
+                    #SelfRegister1{
+                      display: none;
+                    }
+                  </style>
+                @else
+                  <style>
+                    #SelfRegister2{
+                      display: none;
+                    }
+                  </style>
+                @endif
+
+                <li><a href="#" id="SelfRegister1" data-toggle="modal" data-target="#RegisterModal"><span class="ion-ios-arrow-round-forward mr-2"></span>Djamat's member registration</a></li>
+                <li><a href="{{route('CheckEmailFirst')}}" id="SelfRegister2"><span class="ion-ios-arrow-round-forward mr-2"></span>Djamat's member registration</a></li>
                 <li><a href="" data-toggle="modal" data-target="#logoutModal"><span class="ion-ios-arrow-round-forward mr-2"></span>Login</a></li>
               </ul>
             </div>
@@ -81,4 +156,30 @@
           </div>
         </div>
       </div>
+
+      <script>
+          function adminfn(){
+              var admin=document.getElementById('adminx');
+              var amir=document.getElementById('amirx');
+              document.getElementById('admin').style.color="blue";
+              document.getElementById('admin').style.fontSize="25px;";
+              document.getElementById('amir').style.color="black";
+
+              admin.style.display="block";
+              amir.style.display="none";
+
+          }     
+
+          function amirfn(){
+              var admin=document.getElementById('adminx');
+              var amir=document.getElementById('amirx');
+              document.getElementById('admin').style.color="black";
+              document.getElementById('amir').style.color="blue";
+
+              admin.style.display="none";
+              amir.style.display="block";
+          }     
+
+      </script>
+   
     </footer>
