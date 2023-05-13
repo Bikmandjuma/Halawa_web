@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-
+    <link rel="stylesheet" href="../../style/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
@@ -25,6 +26,24 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        #nextbtn:hover,#backbtn:hover{
+            cursor: pointer;
+            background-color:black;
+            color:white;
+
+        }
+
+        #nextbtn,#backbtn{
+            background-color: white;
+            color: black;
+            border-radius: 20px;
+            justify-content: center;
+            justify-items: center;
+            text-align: center;
+            padding:15px;
+        }
+    </style>
   </head>
   <body>
 	  <div class="py-2 bg-primary">
@@ -90,8 +109,8 @@
               </button>
             </div>
         @endif
-    <br>
-    <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(images/bg_4.jpg);" data-stellar-background-ratio="0.5">
+
+    <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="margin-top:5px; background-image: url(images/bg_4.jpg);" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row justify-content-end">
                 <div class="col-md-6 py-5 px-md-5 bg-primary">
@@ -103,19 +122,19 @@
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Firstname">
+                                <input type="text" class="form-control" placeholder="Enter Firstname" name="fname">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Lastname">
+                                <input type="text" class="form-control" placeholder="Enter Lastname" name="lname">
                             </div>
                         </div>
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Email">
+                                <input type="text" class="form-control" placeholder="Enter Email" name="email">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Phone">
+                                <input type="text" class="form-control" placeholder="Enter Phone" name="phone">
                             </div>
                         </div>
 
@@ -124,20 +143,18 @@
                                 <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                          <option value="">Select Your Course</option>
+                                        <select name="gender" id="" class="form-control">
+                                          <option value="">Select gender</option>
                                           <option value="">Art Lesson</option>
                                           <option value="">Language Lesson</option>
-                                          <option value="">Music Lesson</option>
-                                          <option value="">Sports</option>
-                                          <option value="">Other Services</option>
+                                          
                                         </select>
                                     </div>
                                 </div>
                                 </div>
 
                             <div class="form-group ml-md-4">
-                                  <input type="text" class="form-control" placeholder="Phone">
+                                  <input type="date" class="form-control" placeholder="birth_date" name="dob">
                             </div>
                         </div>
 
@@ -147,14 +164,14 @@
                             </div>
                             <div class="form-group ml-md-4 d-md-flex">
 
-                              <button class="btn btn-tertiary">Next</button>
+                              <span id="nextbtn" onclick="nextfn()">Next&nbsp;<i class="fas fa-chevron-right"></i></span>
 
                             </div>
                         </div>
                 
                 </div>
                 
-                <div id="page2">
+                <div id="page2" style="display:none;">
                     
                     <div class="d-md-flex">
                             <div class="form-group">
@@ -201,7 +218,7 @@
                                 <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
                             </div>
                             <div class="form-group ml-md-4 d-md-flex">
-                              <button class="btn btn-tertiary">Back</button>&nbsp;<button class="btn btn-secondary">Submit</button>
+                              <span id="backbtn" onclick="backfn()"><i class="fas fa-chevron-left"></i>&nbsp;Back</span>&nbsp;<button class="btn btn-secondary" style="background-color:black; width:120px;color:white"><i class="fas fa-save"></i>&nbsp;Submit</button>
                             </div>
                         </div>
 
@@ -237,5 +254,25 @@
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
     
+  <script>
+      function nextfn(){
+          var page1=document.getElementById('page1');
+          var page2=document.getElementById('page2');
+
+          page1.style.display="none";
+          page2.style.display="block";
+
+      }    
+
+    function backfn(){
+          var page1=document.getElementById('page1');
+          var page2=document.getElementById('page2');
+
+          page1.style.display="block";
+          page2.style.display="none";
+
+      }  
+  </script>
+
   </body>
 </html>
