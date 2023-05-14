@@ -35,7 +35,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(GuestController::class)->group(function(){
     Route::get('Register_Muslim','Show_Register_Muslim')->name('muslim_self_register');
-    Route::post('RegisterMuslim','Register_Muslim');
+    Route::post('RegisterMuslim','RegisterMuslim')->name('RegisterMuslim');
     Route::get('checkemail','MuslimCheckEmail')->name('CheckEmailFirst');
     Route::post('CreateCheckemail','CreateCheckEmail')->name('CreateCheckEmail');
     Route::get('/checkcode/{email}','MuslimCheckCode')->name('CheckCodeFirst');

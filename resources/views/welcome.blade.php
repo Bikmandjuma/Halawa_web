@@ -30,7 +30,7 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-
+    <link rel="stylesheet" href="../../style/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
@@ -57,6 +57,10 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
     @if(session('wrong_login'))
         <script type="text/javascript">toastr.error('Wrong Credentials , try again !');</script>
     @endif
+
+    @if(session('registers'))
+        <script type="text/javascript">toastr.info('Registered well , login to visit your account !');</script>
+    @endif
       <div class="py-2 bg-primary">
         <div class="container">
             <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0" style="border" >
@@ -81,7 +85,7 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
         <div class="container d-flex align-items-center">
-            <a class="navbar-brand" href="#"><i class="oi oi-mosque"></i>&nbsp;Halawat al-iman</a>
+            <a class="navbar-brand" href="#"><i class="fas fa-mosque"></i>&nbsp;Halawat al-iman</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span>
           </button>

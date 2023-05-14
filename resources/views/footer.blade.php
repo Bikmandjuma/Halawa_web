@@ -10,6 +10,7 @@ $Amir=User::all()->where('role','amir');
 
 ?>
  <footer class="ftco-footer ftco-bg-dark ftco-section">
+  
     <style type="text/css">
       #contact_links a{
         color:black;

@@ -31,6 +31,7 @@
             cursor: pointer;
             background-color:black;
             color:white;
+            border:1px solid yellow;
 
         }
 
@@ -41,7 +42,15 @@
             justify-content: center;
             justify-items: center;
             text-align: center;
-            padding:15px;
+            padding:5px;
+        }
+
+        #HidePswdId,#ShowPswdId,#HidePswdId1,#ShowPswdId1{
+            margin-top:20px;margin-left: -25px;
+        }
+
+        #ShowPswdId:hover,#HidePswdId:hover,#ShowPswdId1:hover,#HidePswdId1:hover{
+            cursor: pointer;
         }
     </style>
   </head>
@@ -70,8 +79,8 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container d-flex align-items-center">
-	    	<a class="navbar-brand" href="index.html">Halawat al-iman</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#"><i class="fas fa-mosque"></i>&nbsp;Halawat al-iman</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
 	      <!-- <p class="button-custom order-lg-last mb-0"><a href="appointment.html" class="btn btn-secondary py-2 px-3">Make An Appointment</a></p> -->
@@ -102,13 +111,30 @@
     </section>
 
         @if(session('registers'))
-            <div class="alert btn-success alert-dismissible fade show text-center" role="alert">
+            <div style="margin-top:5px;" class="alert btn-success alert-dismissible fade show text-center" role="alert">
                   {{session('registers')}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true" style="font-size:25px;">&times;</span>
               </button>
             </div>
         @endif
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            @if($errors->any())
+                <div style="margin-top:5px;" class="alert btn-danger alert-dismissible fade show text-center" role="alert">
+                    @foreach($errors->all() as $error)
+                        {{$error}}
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="font-size:25px;">&times;</span>
+                    </button>
+                </div>
+            @endif
+        </div>  
+        <div class="col-md-3"></div>
+    </div>
 
     <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="margin-top:5px; background-image: url(images/bg_4.jpg);" data-stellar-background-ratio="0.5">
         <div class="container">
@@ -117,24 +143,25 @@
               <div class="heading-section heading-section-white ftco-animate mb-5 text-center">
                 <h2 class="mb-4">Register&nbsp;here</h2>
               </div>
-              <form action="#" class="appointment-form ftco-animate">
+              <form action="{{route('RegisterMuslim')}}" class="appointment-form ftco-animate" method="POST" enctype="multipart/form-data">
+                @csrf
                   <div id="page1">
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Firstname" name="fname">
+                                <input type="text" class="form-control" placeholder="Enter Firstname" name="firstname" value="{{old('firstname')}}">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Lastname" name="lname">
+                                <input type="text" class="form-control" value="{{old('lastname')}}" placeholder="Enter Lastname" name="lastname">
                             </div>
                         </div>
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Email" name="email">
+                                <input type="email" class="form-control" value="{{old('email')}}" placeholder="Enter Email" name="email">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Phone" name="phone">
+                                <input type="text" class="form-control" value="{{old('phone')}}" placeholder="Enter Phone" name="phone">
                             </div>
                         </div>
 
@@ -143,51 +170,64 @@
                                 <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="gender" id="" class="form-control">
+                                        <select name="gender" id="" class="form-control" style="background-color:white;color: steelblue;">
                                           <option value="">Select gender</option>
-                                          <option value="">Art Lesson</option>
-                                          <option value="">Language Lesson</option>
-                                          
+                                          <option value="Male">Male</option>
+                                          <option value="Female">Female</option>
                                         </select>
                                     </div>
                                 </div>
                                 </div>
 
                             <div class="form-group ml-md-4">
-                                  <input type="date" class="form-control" placeholder="birth_date" name="dob">
+                                  <input type="date" class="form-control" placeholder="birth_date" name="birth_date" value="{{old('birth_date')}}">
                             </div>
                         </div>
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+                               <select name="role" id="" class="form-control">
+                                    <option value="">Select role</option>
+                                    <option value="Amir">Amir</option>
+                                    <option value="Vice_amir">Vice amir</option>
+                                    <option value="Mudirat">Mudirat</option>
+                                    <option value="Vice_mudirat">Vice mudirat</option>
+                                    <option value="Dawat">Dawat</option>
+                                    <option value="Imam">Imam</option>
+                                    <option value="Bilal">Bilal</option>
+                                    <option value="Ustaz">Ustaz</option>
+                                    <option value="Mamuma">Mamuma(usual muslim)</option>
+                                </select>
                             </div>
-                            <div class="form-group ml-md-4 d-md-flex">
-
+                            <div class="form-group ml-md-4 d-flex justify-content-center align-items-center">
                               <span id="nextbtn" onclick="nextfn()">Next&nbsp;<i class="fas fa-chevron-right"></i></span>
 
                             </div>
                         </div>
-                
+            
                 </div>
                 
                 <div id="page2" style="display:none;">
                     
                     <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Firstname">
+                                <input type="residence" class="form-control" placeholder="Enter Residence ex:Rwanda" name="residence" value="{{old('residence')}}">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Lastname">
+                                 <select name="study_status" id="" class="form-control">
+                                    <option value="">Study status</option>
+                                    <option value="Graduated">Graduated</option>
+                                    <option value="still_studying" id="still_stuid" onclick="still_stufn()">Still_studying</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="d-md-flex">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Email">
+                                <input type="text" class="form-control" name="start_year" placeholder="Enter start_year ex:2007" value="{{old('start_year')}}">
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="text" class="form-control" placeholder="Enter Phone">
+                                <input type="text" class="form-control" value="{{old('end_year')}}" name="end_year" placeholder="Enter End_year ex:<?php echo date('Y');?>">
                             </div>
                         </div>
 
@@ -196,29 +236,32 @@
                                 <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                          <option value="">Select Your Course</option>
-                                          <option value="">Art Lesson</option>
-                                          <option value="">Language Lesson</option>
-                                          <option value="">Music Lesson</option>
-                                          <option value="">Sports</option>
-                                          <option value="">Other Services</option>
+                                        <select name="department" id="" class="form-control">
+                                          <option value="">Select department</option>
+                                          <option value="IT">IT</option>
+                                          <option value="ET">ET</option>
+                                          <option value="RE">RE</option>
+                                          <option value="MT">MT</option>
                                         </select>
                                     </div>
                                 </div>
                                 </div>
 
-                            <div class="form-group ml-md-4">
-                                  <input type="text" class="form-control" placeholder="Phone">
+                            <div class="form-group ml-md-4 d-flex">
+                                <input type="password" class="form-control" name="password" placeholder="Password" value="{{old('password')}}" id="pswdid">
+                                <i class="fas fa-eye-slash" onclick="ShowPswdFn()" id="ShowPswdId"></i>
+                                <i class="fas fa-eye" style="display:none;" onclick="ShowPswdFn()" id="HidePswdId"></i>
                             </div>
                         </div>
 
                         <div class="d-md-flex">
-                            <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+                            <div class="form-group d-flex">
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="Re_enter Password" id="pswdid1">
+                                <i class="fas fa-eye-slash" onclick="ShowPswdFn1()" id="ShowPswdId1"></i>
+                                <i class="fas fa-eye" style="display:none;" onclick="ShowPswdFn1()" id="HidePswdId1"></i>
                             </div>
-                            <div class="form-group ml-md-4 d-md-flex">
-                              <span id="backbtn" onclick="backfn()"><i class="fas fa-chevron-left"></i>&nbsp;Back</span>&nbsp;<button class="btn btn-secondary" style="background-color:black; width:120px;color:white"><i class="fas fa-save"></i>&nbsp;Submit</button>
+                            <div class="form-group ml-md-4 d-flex justify-content-center align-items-center">
+                              <span id="backbtn" onclick="backfn()"><i class="fas fa-chevron-left"></i>&nbsp;Back</span>&nbsp;&nbsp;&nbsp;<button class="btn btn-secondary" style="background-color:black; width:120px;color:white"><i class="fas fa-save"></i>&nbsp;Submit</button>
                             </div>
                         </div>
 
@@ -236,7 +279,6 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -271,7 +313,34 @@
           page1.style.display="block";
           page2.style.display="none";
 
-      }  
+    }
+
+    function ShowPswdFn(){
+        var x=document.getElementById('pswdid');
+        if (x.type === "password") {
+            x.type = "text";
+            document.getElementById('ShowPswdId').style.display="none";
+            document.getElementById('HidePswdId').style.display="block";
+        }else{
+            x.type="password";
+            document.getElementById('ShowPswdId').style.display="block";
+            document.getElementById('HidePswdId').style.display="none";
+        }
+    }
+
+    function ShowPswdFn1(){
+        var x=document.getElementById('pswdid1');
+        if (x.type === "password") {
+            x.type = "text";
+            document.getElementById('ShowPswdId1').style.display="none";
+            document.getElementById('HidePswdId1').style.display="block";
+        }else{
+            x.type="password";
+            document.getElementById('ShowPswdId1').style.display="block";
+            document.getElementById('HidePswdId1').style.display="none";
+        }
+    }
+  
   </script>
 
   </body>

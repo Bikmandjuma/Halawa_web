@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CheckEmailBeforeSelfRegistration;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendCodeToCheckEmail;
@@ -25,9 +26,8 @@ class GuestController extends Controller
             'birth_date' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'department' => 'required|string',
-            'password' => 'required|string|between:8,32',
+            'password' => 'required|string|between:8,32|confirmed',
             'residence' => 'required|string',
-            'image' => 'required|string',
         ]);
 
         $user=new User;
@@ -44,23 +44,17 @@ class GuestController extends Controller
         $user->birth_date = $req->birth_date;
         $user->residence = $req->residence;
         $user->password = bcrypt($req->phone);
-        // $user->image = $req->image;
+        $user->image ="user.png";
 
-        if($req->hasFile('image')){
-            $file= $req->file('image');
-            $filename= date('YmdHis').$file->getClientOriginalName();
-            $extenstion = $file->getClientOriginalExtension();
-            $file-> move(public_path('images/user/muslim'), $filename);
-            $user->image = $filename;
-        };
-
+        // if($req->hasFile('image')){
+        //     $file= $req->file('image');
+        //     $filename= date('YmdHis').$file->getClientOriginalName();
+        //     $extenstion = $file->getClientOriginalExtension();
+        //     $file-> move(public_path('images/user/muslim'), $filename);
+        //     $user->image = $filename;
+        // };
         $user->save();
-
-        return response()->json([
-            'status' => 'New Muslim added successfully "',
-            'message' => $user,
-        ],200);
-    
+        return redirect(route('homepage'))->with('registers','Registered successfully !');
     }
 
     public function MuslimCheckEmail(){
