@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+    namespace App\Http\Controllers\Web;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Http\Request;
+    use App\Models\CheckEmailBeforeSelfRegistration;
+    use App\Models\User;
+    use Illuminate\Support\Facades\Mail;
+    use Illuminate\Support\Facades\Crypt;
+    use App\Mail\SendCodeToCheckEmail;
+    use Illuminate\Mail\Mailable;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\CheckEmailBeforeSelfRegistration;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Crypt;
-use App\Mail\SendCodeToCheckEmail;
-use Illuminate\Mail\Mailable;
-
-class GuestController extends Controller
-{
+    class GuestController extends Controller
+    {
         public function RegisterMuslim(Request $req){
         $req->validate([
             'firstname' => 'required|string',
