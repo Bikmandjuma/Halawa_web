@@ -55,5 +55,11 @@ class GuestController extends Controller
         }
     }
 
+    //display all muslims
+    public function AllMuslims(){
+        $data=Users::all();
+        return view('muslims',compact('data'));
+    } 
+
 
 }

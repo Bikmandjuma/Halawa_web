@@ -96,7 +96,7 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
                 <li class="nav-item"><a href="{{route('muslims')}}" class="nav-link"><i class="icon-users"></i>&nbsp;All muslims</a></li>
                 <li class="nav-item"><a href="{{url('gallery')}}" class="nav-link"><i class="icon-image"></i>&nbsp;Gallery</a></li>
               <li class="nav-item"><a href="{{url('contact')}}" class="nav-link"><i class="icon-phone"></i>&nbsp;Contact</a></li>
-              <li class="nav-item d-flex"><a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal"><i class="icon-user"></i>&nbsp;Login</a></li>
+              <li class="nav-item d-flex"><a href="{{url('login')}}" class="nav-link"><i class="icon-user"></i>&nbsp;Login</a></li>
             </ul>
           </div>
         </div>
@@ -286,8 +286,8 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                        <h2>Teaching Your Child Some Good Manners</h2>
-                        <p class="mb-0">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                       <!--  <h2>Teaching Your Child Some Good Manners</h2>
+                        <p class="mb-0">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p> -->
                     </div>
                     <div class="col-md-3 d-flex align-items-center">
                         <p class="mb-0"><a href="#" class="btn btn-secondary px-4 py-3">Take a Course</a></p>
@@ -301,10 +301,10 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
-            <h2 class="mb-4"><span>Certified</span> Teachers</h2>
-            <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
+            <h2 class="mb-4"><span>All</span> Leaders</h2>
+            <p>all jamat's leaders</p>
           </div>
-        </div>  
+        </div> 
                 <div class="row">
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="staff">
@@ -487,141 +487,7 @@ $girls_muslim_still_studying_count=collect($girls_muslim_still_studying)->count(
         </div>
         </div>
     </section>
-
-    <section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-2">
-          <div class="col-md-8 text-center heading-section ftco-animate">
-            <h2 class="mb-4"><span>What Parents</span> Says About Us</h2>
-            <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-          </div>
-        </div>
-        <button class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">Test model</button>
-         <!--start of Logout modal -->
-          <div class="modal" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm text-center">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  <h5>Login here</h5>
-                </div>
-                <div class="modal-body">
-                  <form class="form-group" id="login_form" method="POST" action="{{url('test')}}">
-                    @csrf
-                      <!-- <input type="email" name="email" class="form-control" placeholder="Enter email">
-                      <input type="password" name="password" class="form-control" placeholder="Enter password">
-                       -->
-                       <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-                        <input class="input100" type="email" name="email" autofocus id="emailid">  
-                        <span class="focus-input100" data-placeholder="Email"></span>
-                      </div>
-
-                      <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <span class="btn-show-pass">
-                          <i class="icon-eye"></i>
-                        </span>
-                        <input class="input100" type="password" name="password" id="passid">  
-                        <span class="focus-input100" data-placeholder="Password"></span>
-                      </div>
-                      <button class="btn btn-primary" type="submit"><i class="icon-lock"></i> Login</button>
-                  </form>
-                  <p><i class="text-center text-primary"></i>Forgot password <br /></p>
-
-                  <!-- <div class="actionsBtns">
-                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                      <a href="../Logout.php" class="btn btn-primary"><i class="fa fa-lock"></i>  Logout</a>
-                      <button class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>  Cancel</button>
-                  </div> -->
-                </div>
-              </div>
-            </div>
-          </div>
-         <!--end of logout modal-->
-
-        <?php
-            $user=User::all();
-        ?>
-        @foreach($user as $data)
-        <div class="row ftco-animate justify-content-center">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap d-flex">
-                  <div class="user-img mr-4" style="background-image: url(images/teacher-1.jpg)">
-                  </div>
-                  <div class="text ml-2 bg-light">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">{{$data->firstname}} {{$data->lastname}}</p>
-                    <span class="position">Father</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap d-flex">
-                  <div class="user-img mr-4" style="background-image: url(images/teacher-2.jpg)">
-                  </div>
-                  <div class="text ml-2 bg-light">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Henry Dee</p>
-                    <span class="position">Mother</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap d-flex">
-                  <div class="user-img mr-4" style="background-image: url(images/teacher-3.jpg)">
-                  </div>
-                  <div class="text ml-2 bg-light">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Mark Huff</p>
-                    <span class="position">Mother</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap d-flex">
-                  <div class="user-img mr-4" style="background-image: url(images/teacher-4.jpg)">
-                  </div>
-                  <div class="text ml-2 bg-light">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Rodel Golez</p>
-                    <span class="position">Mother</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap d-flex">
-                  <div class="user-img mr-4" style="background-image: url(images/teacher-1.jpg)">
-                  </div>
-                  <div class="text ml-2 bg-light">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Ken Bosh</p>
-                    <span class="position">Mother</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-      </div>
-    </section>
-
+     
     <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(images/bg_5.jpg);" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row justify-content-end">

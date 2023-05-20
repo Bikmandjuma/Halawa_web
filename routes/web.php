@@ -20,16 +20,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/AllMuslims', function () {
-    return view('muslims');
-})->name('muslims');
+Route::get('/AllMuslims',[GuestController::class,'AllMuslims'])->name('muslims');
 
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('test','login')->name('login');
+    Route::get('login',function(){
+        return view('Login');
+    });
+    Route::post('loginPost','login')->name('login');
     Route::post('logout','Logout')->name('logout');
 });
 

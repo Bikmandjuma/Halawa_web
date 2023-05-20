@@ -131,4 +131,9 @@
         return view('SelfRegistration');
     }
 
+    //display all muslims
+    public function AllMuslims(){
+        $datas=User::paginate(8);
+        return view('muslims',compact('datas'));
+    } 
 }
