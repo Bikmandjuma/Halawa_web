@@ -59,33 +59,11 @@ class UserController extends Controller
             'profile_picture.mimes'=>'profile picture must be in format of jpg,jpeg,png or pdf',
         ]);
 
-        $rancodes=rand(0,100000);
-        // $image= $request->file('image');
-        // list($type, $image) = explode(';',$image);
-        // list(, $image) = explode(',',$image);
-
-        // $image = base64_decode($image);
-        // $image_name = time().'.png';
-        // file_put_contents(public_path('images/admin/').$image_name, $image);
-
-        // $file= $request->file('profile_picture');
-        // $filename= $rancodes.'_'.date('YmdHi').$file->getClientOriginalName();
-        // $extenstion = $file->getClientOriginalExtension();
-        // $file-> move(public_path('images/admin/'), $filename);
-        $folderPath = public_path('images/admin/');
- 
-        $image_parts = explode(";base64,", $request->image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
- 
-        $imageName = uniqid() . '.png';
- 
-        $imageFullPath = $folderPath.$imageName;
- 
-        file_put_contents($imageFullPath, $image_base64);
- 
-        $profile=User::find($id)->update(['image'=>$imageName]);
+        $file= $request->file('profile_picture');
+        $filename= date('YmdHi').$file->getClientOriginalName();
+        $extenstion = $file->getClientOriginalExtension();
+        $file-> move(public_path('images/admin/'), $filename);
+        $profile=User::find($id)->update(['image'=>$filename]);
 
         if ($profile) {
             return redirect()->back()->with('profile_changed','profile changed  successfully !');

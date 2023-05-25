@@ -35,7 +35,7 @@ class AuthController extends Controller
         auth()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
-        return redirect(url('/'));
+        return redirect(url('/login'));
         
     }
 }

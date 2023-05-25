@@ -67,7 +67,7 @@
           font-family: serif;
       }
 
-      .containers form input[type="email"],input[type="password"]{
+      .containers form input[type="email"],input[type="password"],input[type="text"]{
         border: none;
         border: 1px solid skyblue;
         border-radius: 50px;
@@ -83,7 +83,13 @@
         margin-left: 240px;
       }
 
-      #eye_pswd:hover{
+      #eye_pswd2{
+        display: flex;
+        margin-top: -35px;
+        margin-left: 240px;
+      }
+
+      #eye_pswd:hover,#eye_pswd2:hover{
         cursor: pointer;
       }
 
@@ -171,15 +177,16 @@
                 <div class="card">              
                     <div class="card_title">
                       <h3><i class="fas fa-anvelope"></i>Login here</h3>
+                      <!-- <?php echo bcrypt('malik123@');?> -->
                     </div>
 
                     <div class="containers">
                       <br>
                       <form action="{{url('loginPost')}}" method="POST">
                           @csrf
-                          <input type="email" name="email" value="{{old('email')}}" placeholder="Enter email" class="form-control"><br>
+                          <input type="email" name="email" value="{{old('email')}}" placeholder="Enter email" class="form-control" ><br>
                           
-                          <input type="password" name="password" placeholder="Enter password" class="form-control"><i class="fas fa-eye-slash" id="eye_pswd"></i><br>
+                          <input type="password" name="password" placeholder="Enter password" class="form-control" id="EyeId"><i class="fas fa-eye-slash" onclick="EyeSlash()" id="eye_pswd"></i><i class="fas fa-eye" style="display:none;" onclick="Eye()" id="eye_pswd2"></i><br>
 
                           <button style="margin-bottom:5px;" class="btn btn-info image" name="image"><i class="fas fa-lock-open"></i>&nbsp;Login</button>
                       </form> 
@@ -194,9 +201,28 @@
       </div>
     </section>
     
-
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <script>
+    function EyeSlash(){
+      var input=document.getElementById('EyeId');
+      if (input.type === "password") {
+        input.type = "text";
+        document.getElementById('eye_pswd').style.display="none";
+        document.getElementById('eye_pswd2').style.display="block";
+      }
+    }
+
+    function Eye(){
+      var input=document.getElementById('EyeId');
+      if (input.type === "text") {
+        input.type = "password";
+        document.getElementById('eye_pswd2').style.display="none";
+        document.getElementById('eye_pswd').style.display="block";
+      }
+    }
+  </script>
 
 
   <script src="js/jquery.min.js"></script>
